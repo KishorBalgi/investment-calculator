@@ -243,12 +243,13 @@ button:hover {
 /* Theme */
 .theme {
   position: fixed;
-  top: 93%;
+  bottom: 3%;
   left: 20px;
   display: flex;
   width: 90px;
   align-items: center;
   justify-content: space-between;
+  z-index: 9999;
 }
 .mode {
   width: 20px;
