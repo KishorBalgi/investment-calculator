@@ -1,0 +1,52 @@
+/* Queries */
+@media only screen and (max-width: 1540px) {
+  form div {
+    width: 90%;
+  }
+  .return div {
+    width: 90%;
+  }
+}
+@media only screen and (max-width: 1300px) {
+  .calculator {
+    width: 70vw;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .calculator {
+    width: 80vw;
+  }
+  .asset {
+    width: 90%;
+  }
+}
+@media only screen and (max-width: 690px) {
+  .calculator {
+    width: 90vw;
+  }
+}
+@media only screen and (max-width: 615px) {
+  form div {
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+  input {
+    margin: 1rem 0;
+  }
+  select {
+    margin: 1rem 0;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .calculator {
+    width: 95vw;
+  }
+  .asset {
+    width: 95%;
+  }
+}
+@media only screen and (max-width: 550px) {
+  h1 {
+    font-size: 1.3rem;
+  }
+}

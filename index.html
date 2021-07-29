@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="Vendors/CSS/normalize.css" />
+    <link rel="stylesheet" href="Resources/Styles/style.css" />
+    <link rel="stylesheet" href="Resources/Styles/queries.css" />
+    <script defer src="Resources/Script/script.js"></script>
+    <title>Investment Calculator</title>
+  </head>
+  <body>
+    <header>
+      <nav class="main-nav">
+        <ul class="nav-links">
+          <li class="nav-link"><a href="#invest">Invest</a></li>
+          <li class="nav-link"><a href="#returns">Returns </a></li>
+          <li class="nav-link"><a href="#"> </a></li>
+          <li class="nav-link"><a href="#"> </a></li>
+          <li class="nav-link"><a href="#"> </a></li>
+          <li class="nav-link"><a href="#"> </a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section id="invest">
+      <div class="calculator">
+        <div class="select-type hiidden">
+          <button class="btn-type btn-working btn-type-active">
+            18 and Above
+          </button>
+          <button class="btn-type btn-student">Under 18</button>
+        </div>
+
+        <form class="invest-form hiidden">
+          <div>
+            <label for="currency">Currency:</label>
+            <select name="currency" id="currency"></select>
+          </div>
+          <div>
+            <label for="salary">Salary:</label>
+            <input
+              id="salary"
+              name="salary"
+              type="number"
+              placeholder="Enter your salary/Month"
+              required
+            />
+          </div>
+          <div>
+            <label for="age">Age:</label>
+            <input
+              id="age"
+              name="Age"
+              type="number"
+              placeholder="Enter your age"
+              required
+            />
+          </div>
+          <div>
+            <label for="spending">Spending:</label>
+            <input
+              id="spending"
+              name="Spending"
+              type="number"
+              placeholder="Spending per month"
+              required
+            />
+          </div>
+          <div>
+            <label for="saving">Saving:</label>
+            <input
+              id="saving"
+              name="Saving"
+              type="number"
+              placeholder="Saving per month"
+              required
+            />
+          </div>
+          <button id="btn-submit-working" type="submit">Submit</button>
+        </form>
+
+        <div class="invest-student hidden">
+          <button class="btn-back btn-back-student">&larr;</button>
+          <h1>Invest in these valuable assets</h1>
+          <div class="asset">
+            <img src="Vendors/Icons/005-books.png" />
+            <p>Invest in Books.</p>
+          </div>
+          <div class="asset">
+            <img src="Vendors/Icons/010-time.png" />
+            <p>Invest time in productive activities.</p>
+          </div>
+          <div class="asset">
+            <img src="Vendors/Icons/006-courses.png" />
+            <p>Invest in online courses.</p>
+          </div>
+          <div class="asset">
+            <img src="Vendors/Icons/007-sports.png" />
+            <p>Invest in sports you like.</p>
+          </div>
+
+          <div class="asset">
+            <img src="Vendors/Icons/009-activities.png" />
+            <p>Invest in extracurricular activities.</p>
+          </div>
+
+          <div class="asset">
+            <img src="Vendors/Icons/011-invest.png" />
+            <p>Gain knowledge about personal finance.</p>
+          </div>
+
+          <div class="asset">
+            <img src="Vendors/Icons/008-money.png" />
+            <p>Develop the habit of saving every month.</p>
+          </div>
+        </div>
+
+        <div class="asset-allocation hidden">
+          <button class="btn-back btn-back-invest">&larr;</button>
+          <h1>Your Asset Allocation</h1>
+          <div class="asset asset-equity">
+            <img src="Vendors/Icons/001-equity.png" />
+            <p>3000$ in equity.</p>
+          </div>
+          <div class="asset asset-bonds">
+            <img src="Vendors/Icons/002-bond.png" />
+            <p>200$ in Fixed Income.</p>
+          </div>
+          <div class="asset asset-precious">
+            <div class="asset-gold">
+              <img src="Vendors/Icons/003-gold.png" />
+              <p>100$ in gold.</p>
+            </div>
+            <p>OR</p>
+            <div class="asset-crypto">
+              <img src="Vendors/Icons/004-crypto.png" />
+              <p>100$ in gold and 100$ in Crypto Currency.</p>
+            </div>
+          </div>
+          <p class="note note-invest">
+            This allocation is based on factors like age, risk apetite and some
+            fundamental rules. 70% in Equity, 30% in Fixed Inome or 10% in
+            Precious metals and Crypto.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="returns">
+      <div class="return calculator">
+        <h2>Returns Calculator</h2>
+        <form class="return-form">
+          <div>
+            <label for="return-start">Initial Investment:</label>
+            <input
+              id="return-start"
+              name="return-start"
+              type="number"
+              placeholder="Initial amount invested"
+              required
+            />
+          </div>
+          <div>
+            <label for="return-end">Final Investment:</label>
+            <input
+              id="return-end"
+              name="return-end"
+              type="number"
+              placeholder="Final investment value"
+              required
+            />
+          </div>
+          <div>
+            <label for="return-period">Period:</label>
+            <input
+              id="return-period"
+              name="return-period"
+              type="number"
+              placeholder="Holding period"
+              required
+            />
+          </div>
+          <button class="btn-submit" id="btn-submit-return">Calculate</button>
+          <div class="result-box result-return hidden">
+            <p>AR:43.33% CAGR:43.33%</p>
+            <button class="reset reset-return">Reset</button>
+          </div>
+        </form>
+      </div>
+    </section>
+    <div class="theme">
+      <img class="mode" src="Vendors/Icons/013-mode-light.png" />
+      <input type="checkbox" id="btn-theme" value="light" />
+      <img class="mode" src="Vendors/Icons/012-mode-dark.png" />
+    </div>
+  </body>
+</html>
