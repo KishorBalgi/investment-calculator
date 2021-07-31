@@ -12,12 +12,38 @@
     width: 70vw;
   }
 }
+@media only screen and (max-width: 1400px) {
+  .calc-box {
+    flex-direction: column;
+    width: 90vw;
+  }
+  .sip {
+    width: 80%;
+  }
+}
+@media only screen and (max-width: 960px) {
+  .sip {
+    width: 90%;
+  }
+}
 @media only screen and (max-width: 900px) {
   .calculator {
     width: 80vw;
   }
   .asset {
     width: 90%;
+  }
+}
+@media only screen and (max-width: 760px) {
+  .sip-invest {
+    flex-direction: column;
+    align-items: center;
+  }
+  .sip-invest input {
+    margin-top: 1rem;
+  }
+  .chart-def {
+    width: 160%;
   }
 }
 @media only screen and (max-width: 690px) {
@@ -36,9 +62,14 @@
   select {
     margin: 1rem 0;
   }
+  .radio-box {
+    flex-direction: row;
+    width: 80%;
+  }
 }
 @media only screen and (max-width: 500px) {
-  .calculator {
+  .calculator,
+  .calc-box {
     width: 95vw;
   }
   .asset {
@@ -48,5 +79,13 @@
 @media only screen and (max-width: 550px) {
   h1 {
     font-size: 1.3rem;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .chart-def {
+    width: 200%;
+  }
+  .chart {
+    min-width: 250px;
   }
 }

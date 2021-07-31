@@ -1,9 +1,16 @@
 :root {
   --data-afterInvest: "";
   --data-afterReturn: "";
-  --btn-blue: rgb(6, 43, 255);
+  --primary-color: rgb(138, 255, 84);
+  --btn-submit: rgb(23, 219, 33);
   --theme-complement: rgb(34, 34, 34);
   --theme: rgb(202, 200, 200);
+  --color-chart-init: rgb(66, 126, 255);
+  --color-chart-ret: rgb(74, 252, 89);
+  --data-intrest-sip: 40%;
+  --data-period-sip: 3.33%;
+  --data-init-sip: 93.6841%;
+  --data-ret-sip: 6.3158%;
 }
 * {
   margin: 0;
@@ -30,7 +37,7 @@ button {
   border: none;
   background: none;
   cursor: pointer;
-  transition: all 0.5s ease;
+  transition: all 1s;
 }
 input {
   border-radius: 5px;
@@ -38,6 +45,7 @@ input {
   height: 30px;
   padding: 5px;
   outline: none;
+  margin: 0 7px;
 }
 label {
   font-weight: bold;
@@ -62,6 +70,103 @@ h2 {
   color: #fff;
   font-size: 25px;
   padding: 15px;
+}
+.calc-box {
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-color);
+  width: 80vw;
+  margin: 0 auto;
+  height: fit-content;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+.sip {
+  width: 55%;
+}
+.sip .range-box,
+.sip-invest {
+  width: 90%;
+}
+.chart-box {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.chart-def {
+  display: flex;
+  justify-content: space-evenly;
+  width: 85%;
+  padding: 1.5rem 0 0 0;
+}
+.chart-def span::before {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 20px;
+  border-radius: 2px;
+  margin: 0 10px;
+  background: currentColor;
+}
+.chart {
+  background: radial-gradient(
+    circle closest-side,
+    transparent 100%,
+    var(--primary-color) 0
+  );
+  min-width: 300px;
+  min-height: 300px;
+  max-width: 450px;
+  max-height: 450px;
+}
+.chart-sip {
+  background: radial-gradient(
+      circle closest-side,
+      transparent 100%,
+      var(--primary-color) 0
+    ),
+    conic-gradient(
+      from 0deg,
+      var(--color-chart-init) 0,
+      var(--color-chart-init) var(--data-init-sip),
+      var(--color-chart-ret) 0,
+      var(--color-chart-ret) var(--data-ret-sip)
+    );
+}
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 20px;
+  align-self: center;
+  border-radius: 20px;
+  outline: none;
+  background: #fff;
+  transition: all 0.5s ease;
+}
+#sip-intrest-slider {
+  background: linear-gradient(
+    90deg,
+    var(--btn-submit) var(--data-intrest-sip),
+    #fff var(--data-intrest-sip)
+  );
+}
+#sip-period-slider {
+  background: linear-gradient(
+    90deg,
+    var(--btn-submit) var(--data-period-sip),
+    #fff var(--data-period-sip)
+  );
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  background-color: #fff;
+  cursor: pointer;
 }
 .note {
   color: #fff;
@@ -108,8 +213,7 @@ header {
   flex-direction: column;
   width: 50vw;
   height: fit-content;
-  background-color: #0093e9;
-  background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
+  background-color: var(--primary-color);
   border-radius: 10px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
   margin: 0 auto;
@@ -146,16 +250,21 @@ button[type="submit"] {
   padding: 10px 20px;
   color: #fff;
   font-weight: bold;
-  background-color: var(--btn-blue);
+  background-color: var(--btn-submit);
 }
 button:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
+}
+input[type="radio"] {
+  width: 25px;
+  height: 25px;
 }
 .invest-form::after {
   content: attr(data-afterInvest);
   color: red;
   padding: 10px 0;
 }
+
 /* Asset Allocation */
 .asset-allocation {
   display: flex;
@@ -219,7 +328,7 @@ button:hover {
   font-weight: bold;
   font-size: 25px;
   color: #fff;
-  background-color: var(--btn-blue);
+  background-color: var(--btn-submit);
 }
 .result-box {
   display: flex;
@@ -227,26 +336,60 @@ button:hover {
   background-color: #fff;
   border-radius: 10px;
   width: 100%;
+  margin: 20px 0;
 }
 .result-box p {
   font-size: 30px;
   font-weight: bold;
+  text-align: center;
 }
 .reset {
   background-color: rgb(245, 245, 245);
   border-radius: 5px;
-  border: 2px solid var(--btn-blue);
-  color: var(--btn-blue);
+  border: 2px solid var(--btn-submit);
+  color: var(--btn-submit);
   font-weight: bold;
   padding: 10px;
+  margin: 20px 0;
+}
+/* SIP/ Lumpsum */
+.radio-box {
+  width: 50%;
+  align-items: center;
+}
+.range-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.range-box div {
+  padding: 10px 0;
+  width: 100%;
+}
+.result-sip {
+  flex-direction: column;
+}
+#tag {
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.514);
+}
+.sip-row {
+  display: flex;
+  align-items: center;
+}
+.sip-row div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 /* Theme */
 .theme {
   position: fixed;
-  bottom: 3%;
+  bottom: 1%;
   left: 20px;
   display: flex;
   width: 90px;
+  opacity: 0.7;
   align-items: center;
   justify-content: space-between;
   z-index: 9999;
