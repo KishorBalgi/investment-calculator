@@ -1,12 +1,12 @@
 :root {
   --data-afterInvest: "";
   --data-afterReturn: "";
-  --primary-color: rgb(138, 255, 84);
-  --btn-submit: rgb(23, 219, 33);
-  --theme-complement: rgb(34, 34, 34);
+  --primary-color: #d436f0;
+  --btn-submit: #5b007d;
+  --theme-complement: #231824;
   --theme: rgb(202, 200, 200);
-  --color-chart-init: rgb(66, 126, 255);
-  --color-chart-ret: rgb(74, 252, 89);
+  --color-chart-init: #5b007d;
+  --color-chart-ret: #23beb6;
   --data-intrest-sip: 40%;
   --data-period-sip: 3.33%;
   --data-init-sip: 93.6841%;
@@ -78,7 +78,7 @@ h2 {
   width: 80vw;
   margin: 0 auto;
   height: fit-content;
-  border-radius: 10px;
+  border-radius: 80px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 }
 .sip {
@@ -214,7 +214,10 @@ header {
   width: 50vw;
   height: fit-content;
   background-color: var(--primary-color);
-  border-radius: 10px;
+  border-start-end-radius: 80px;
+  border-end-start-radius: 80px;
+  border-start-start-radius: 20px;
+  border-end-end-radius: 20px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
   margin: 0 auto;
 }
@@ -224,11 +227,14 @@ header {
 }
 .btn-type {
   padding: 20px 0;
-  border-radius: 10px;
   font-weight: bold;
+  opacity: 0.4;
 }
 .btn-type-active {
-  background-color: rgba(0, 0, 0, 0.15);
+  /* background-color: rgba(0, 0, 0, 0.15); */
+  color: #fff;
+  opacity: 1;
+  font-size: 110%;
 }
 .btn-type-active:hover {
   transform: none;

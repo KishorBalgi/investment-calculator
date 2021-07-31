@@ -125,22 +125,22 @@ const submitInvestWorking = function (e) {
   }
   setErrorInvest("");
   equity.innerHTML = `${(((100 - ageVal) / 100) * savingVal).toFixed(
-    2
+    0
   )}${currencyVal} in Equity.`;
   bonds.innerHTML = `${(((2 * ageVal) / 300) * savingVal).toFixed(
-    2
+    0
   )}${currencyVal} in Fixed Income.`;
   gold.innerHTML = `${((ageVal / 300) * savingVal).toFixed(
-    2
+    0
   )}${currencyVal} in gold.`;
-  crypto.innerHTML = `${(((5 * ageVal) / 3000) * savingVal).toFixed(2)}-${(
+  crypto.innerHTML = `${(((5 * ageVal) / 3000) * savingVal).toFixed(0)}-${(
     ((8 * ageVal) / 3000) *
     savingVal
-  ).toFixed(2)}${currencyVal} in gold and </br>${(
+  ).toFixed(0)}${currencyVal} in gold and </br>${(
     ((2 * ageVal) / 3000) *
     savingVal
-  ).toFixed(2)}-${(((5 * ageVal) / 3000) * savingVal).toFixed(
-    2
+  ).toFixed(0)}-${(((5 * ageVal) / 3000) * savingVal).toFixed(
+    0
   )}${currencyVal} in Crypto Currency.`;
   switchInvest();
 };
@@ -185,7 +185,7 @@ btnTheme.addEventListener("click", function (e) {
   btnTheme.value = btnTheme.value === "light" ? "dark" : "light";
   setTimeout(() => {
     if (btnTheme.value === "dark") {
-      document.documentElement.style.setProperty("--theme", "rgb(34, 34, 34)");
+      document.documentElement.style.setProperty("--theme", "#231824");
       document.documentElement.style.setProperty(
         "--theme-complement",
         "rgb(202, 200, 200)"
@@ -197,7 +197,7 @@ btnTheme.addEventListener("click", function (e) {
       );
       document.documentElement.style.setProperty(
         "--theme-complement",
-        "rgb(34, 34, 34)"
+        "#231824"
       );
     }
   }, 300);
