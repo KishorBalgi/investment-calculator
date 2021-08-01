@@ -1,12 +1,12 @@
 :root {
   --data-afterInvest: "";
   --data-afterReturn: "";
-  --primary-color: #4a148c;
-  --btn-submit: #755c8b;
+  --primary-color: #387ed1;
+  --btn-submit: #7ab2ff;
   --theme-complement: #231824;
   --theme: rgb(202, 200, 200);
-  --color-chart-init: #755c8b;
-  --color-chart-ret: #62baac;
+  --color-chart-init: #7ab2ff;
+  --color-chart-ret: #e1f1ff;
   --data-intrest-sip: 40%;
   --data-period-sip: 3.33%;
   --data-init-sip: 93.6841%;
