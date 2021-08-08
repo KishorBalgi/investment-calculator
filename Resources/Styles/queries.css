@@ -17,13 +17,17 @@
     flex-direction: column;
     width: 90vw;
   }
-  .sip {
+  .sip,
+  .mf {
     width: 80%;
   }
 }
 @media only screen and (max-width: 960px) {
   .sip {
     width: 90%;
+  }
+  .calc-row {
+    flex-direction: column;
   }
 }
 @media only screen and (max-width: 900px) {
@@ -35,11 +39,11 @@
   }
 }
 @media only screen and (max-width: 760px) {
-  .sip-invest {
+  .invest-box {
     flex-direction: column;
     align-items: center;
   }
-  .sip-invest input {
+  .invest-box input {
     margin-top: 1rem;
   }
   .chart-def {
@@ -68,11 +72,18 @@
     flex-direction: row;
     width: 80%;
   }
+  .range-box div {
+    flex-direction: row;
+    align-items: center;
+  }
 }
 @media only screen and (max-width: 500px) {
   .calculator,
   .calc-box {
     width: 95vw;
+  }
+  .calc-box {
+    border-radius: 20px;
   }
   .asset {
     width: 95%;

@@ -27,6 +27,7 @@ const resultReturnBox = document.querySelector(".result-return");
 const resultReturn = document.querySelector(".result-return p");
 const btnResetReturn = document.querySelector(".reset-return");
 const btnTheme = document.getElementById("btn-theme");
+// SIP
 const SIPInitial = document.getElementById("sip-initial");
 const SIPIntrest = document.getElementById("sip-intrest-slider");
 const SIPIntrestInput = document.getElementById("sip-intrest");
@@ -35,7 +36,24 @@ const SIPPeriodVal = document.querySelector(".sip-period-value");
 const SIPResInit = document.querySelector(".sip-result-initial");
 const SIPResRet = document.querySelector(".sip-result-return");
 const SIPResTot = document.querySelector(".sip-result-total");
+// MF
+const MFInitial = document.getElementById("mf-initial");
+const MFIntrest = document.getElementById("mf-intrest-slider");
+const MFIntrestInput = document.getElementById("mf-intrest");
+const MFPeriod = document.getElementById("mf-period-slider");
+const MFPeriodVal = document.querySelector(".mf-period-value");
+const MFResInit = document.querySelector(".mf-result-initial");
+const MFResRet = document.querySelector(".mf-result-return");
+const MFResTot = document.querySelector(".mf-result-total");
+
 let SIPMode = 1;
+// Internationalization:
+const options = {
+  style: "currency",
+  currency: "INR",
+  useGrouping: true,
+};
+// console.log(new Intl.NumberFormat("en-IN", options).format());
 // Currency:
 const date = new Date();
 // console.log(`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`);
@@ -124,24 +142,27 @@ const submitInvestWorking = function (e) {
     return;
   }
   setErrorInvest("");
-  equity.innerHTML = `${(((100 - ageVal) / 100) * savingVal).toFixed(
-    0
-  )}${currencyVal} in Equity.`;
-  bonds.innerHTML = `${(((2 * ageVal) / 300) * savingVal).toFixed(
-    0
-  )}${currencyVal} in Fixed Income.`;
-  gold.innerHTML = `${((ageVal / 300) * savingVal).toFixed(
-    0
-  )}${currencyVal} in gold.`;
-  crypto.innerHTML = `${(((5 * ageVal) / 3000) * savingVal).toFixed(0)}-${(
-    ((8 * ageVal) / 3000) *
-    savingVal
-  ).toFixed(0)}${currencyVal} in gold and </br>${(
-    ((2 * ageVal) / 3000) *
-    savingVal
-  ).toFixed(0)}-${(((5 * ageVal) / 3000) * savingVal).toFixed(
-    0
-  )}${currencyVal} in Crypto Currency.`;
+  equity.innerHTML = `${new Intl.NumberFormat("en-IN", options).format(
+    (((100 - ageVal) / 100) * savingVal).toFixed(0)
+  )} in Equity.`;
+  bonds.innerHTML = `${new Intl.NumberFormat("en-IN", options).format(
+    (((2 * ageVal) / 300) * savingVal).toFixed(0)
+  )} in Fixed Income.`;
+  gold.innerHTML = `${new Intl.NumberFormat("en-IN", options).format(
+    ((ageVal / 300) * savingVal).toFixed(0)
+  )} in gold.`;
+  crypto.innerHTML = `${new Intl.NumberFormat("en-IN", options).format(
+    (((5 * ageVal) / 3000) * savingVal).toFixed(0)
+  )}-${new Intl.NumberFormat("en-IN", options)
+    .format(((8 * ageVal) / 3000) * savingVal)
+    .toFixed(0)} in gold and </br>${new Intl.NumberFormat(
+    "en-IN",
+    options
+  ).format(
+    (((2 * ageVal) / 3000) * savingVal).toFixed(0)
+  )}-${new Intl.NumberFormat("en-IN", options).format(
+    (((5 * ageVal) / 3000) * savingVal).toFixed(0)
+  )} in Crypto Currency.`;
   switchInvest();
 };
 btnWorking.addEventListener("click", activateForm);
@@ -223,19 +244,28 @@ const renderSIPResult = function (init, int, per) {
     maturity = (init * (1 + int / 100) ** per).toFixed(0);
   }
 
-  SIPResInit.innerHTML = `&#8377; ${init}`;
-  SIPResRet.innerHTML = `&#8377; ${(maturity - init).toFixed(0)}`;
-  SIPResTot.innerHTML = `&#8377; ${maturity}`;
+  SIPResInit.innerHTML = `${new Intl.NumberFormat("en-IN", options).format(
+    init
+  )}`;
+  SIPResRet.innerHTML = `${new Intl.NumberFormat("en-IN", options).format(
+    (maturity - init).toFixed(0)
+  )}`;
+  SIPResTot.innerHTML = `${new Intl.NumberFormat("en-IN", options).format(
+    maturity
+  )}`;
   root.style.setProperty("--data-init-sip", `${(init * 100) / maturity}%`);
 };
 const renderSIP = function (int) {
   SIPIntrest.value = SIPIntrestInput.value = int;
+  if (SIPInitial.value > 200000) SIPInitial.value = 200000;
+  if (SIPInitial.value <= 0) SIPInitial.value = 500;
+  if (SIPIntrestInput.value <= 0) SIPIntrest.value = SIPIntrestInput.value = 1;
+  if (SIPIntrestInput.value > 30) SIPIntrest.value = SIPIntrestInput.value = 30;
   const initial = SIPInitial.value;
   const intrest = SIPIntrest.value;
   const period = SIPPeriod.value;
   // Constraints:
-  if (initial > 200000) SIPInitial.value = 200000;
-  if (SIPIntrestInput.value > 30) SIPIntrest.value = SIPIntrestInput.value = 30;
+
   SIPPeriodVal.innerHTML = `${period} ${+period === 1 ? "Year" : "Years"}`;
   // Render Sliders:
   root.style.setProperty(
@@ -245,3 +275,38 @@ const renderSIP = function (int) {
   root.style.setProperty("--data-period-sip", `${(period / 0.3).toFixed(2)}%`);
   renderSIPResult(initial, intrest, period);
 };
+
+// MF Caclculator:
+const renderMFResult = function (init, int, per) {
+  let maturity;
+  maturity = (init * (1 + int / 100) ** per).toFixed(0);
+  MFResInit.innerHTML = `${new Intl.NumberFormat("en-IN", options).format(
+    init
+  )}`;
+  MFResRet.innerHTML = `${new Intl.NumberFormat("en-IN", options).format(
+    (maturity - init).toFixed(0)
+  )}`;
+  MFResTot.innerHTML = `${new Intl.NumberFormat("en-IN", options).format(
+    maturity
+  )}`;
+  root.style.setProperty("--data-init-mf", `${(init * 100) / maturity}%`);
+};
+const renderMF = function (int) {
+  MFIntrest.value = MFIntrestInput.value = int;
+  if (MFInitial.value > 5000000) MFInitial.value = 5000000;
+  if (MFInitial.value <= 0) MFInitial.value = 500;
+  if (MFIntrestInput.value <= 0) MFIntrest.value = MFIntrestInput.value = 1;
+  if (MFIntrestInput.value > 50) MFIntrest.value = MFIntrestInput.value = 50;
+  const initial = MFInitial.value;
+  const intrest = MFIntrest.value;
+  const period = MFPeriod.value;
+  // Constraints:
+
+  MFPeriodVal.innerHTML = `${period} ${+period === 1 ? "Year" : "Years"}`;
+  // Render Sliders:
+  root.style.setProperty("--data-intrest-mf", `${(intrest / 0.5).toFixed(2)}%`);
+  root.style.setProperty("--data-period-mf", `${(period / 0.3).toFixed(2)}%`);
+  renderMFResult(initial, intrest, period);
+};
+renderSIP(SIPIntrest.value);
+renderMF(MFIntrest.value);

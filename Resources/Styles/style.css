@@ -9,8 +9,12 @@
   --color-chart-ret: #e1f1ff;
   --data-intrest-sip: 40%;
   --data-period-sip: 3.33%;
+  --data-intrest-mf: 24%;
+  --data-period-mf: 16.66%;
   --data-init-sip: 93.6841%;
   --data-ret-sip: 6.3158%;
+  --data-init-mf: 93.6841%;
+  --data-ret-mf: 6.3158%;
 }
 * {
   margin: 0;
@@ -81,93 +85,7 @@ h2 {
   border-radius: 80px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 }
-.sip {
-  width: 55%;
-}
-.sip .range-box,
-.sip-invest {
-  width: 90%;
-}
-.chart-box {
-  width: 45%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-.chart-def {
-  display: flex;
-  justify-content: space-evenly;
-  width: 85%;
-  padding: 1.5rem 0 0 0;
-}
-.chart-def span::before {
-  content: "";
-  display: inline-block;
-  width: 30px;
-  height: 20px;
-  border-radius: 2px;
-  margin: 0 10px;
-  background: currentColor;
-}
-.chart {
-  background: radial-gradient(
-    circle closest-side,
-    transparent 100%,
-    var(--primary-color) 0
-  );
-  min-width: 300px;
-  min-height: 300px;
-  max-width: 450px;
-  max-height: 450px;
-}
-.chart-sip {
-  background: radial-gradient(
-      circle closest-side,
-      transparent 100%,
-      var(--primary-color) 0
-    ),
-    conic-gradient(
-      from 0deg,
-      var(--color-chart-init) 0,
-      var(--color-chart-init) var(--data-init-sip),
-      var(--color-chart-ret) 0,
-      var(--color-chart-ret) var(--data-ret-sip)
-    );
-}
-.slider {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 20px;
-  align-self: center;
-  border-radius: 20px;
-  outline: none;
-  background: #fff;
-  transition: all 0.5s ease;
-}
-#sip-intrest-slider {
-  background: linear-gradient(
-    90deg,
-    var(--btn-submit) var(--data-intrest-sip),
-    #fff var(--data-intrest-sip)
-  );
-}
-#sip-period-slider {
-  background: linear-gradient(
-    90deg,
-    var(--btn-submit) var(--data-period-sip),
-    #fff var(--data-period-sip)
-  );
-}
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 50px;
-  background-color: #fff;
-  cursor: pointer;
-}
+
 .note {
   color: #fff;
   font-size: 1rem;
@@ -242,13 +160,13 @@ header {
 form {
   display: flex;
   flex-direction: column;
+  width: 100%;
   align-items: center;
   padding-bottom: 3rem;
 }
 form div {
   display: flex;
   justify-content: space-between;
-  width: 60%;
   padding: 30px;
 }
 button[type="submit"] {
@@ -338,11 +256,19 @@ input[type="radio"] {
 }
 .result-box {
   display: flex;
+  flex-direction: column;
   align-items: center;
   background-color: #fff;
   border-radius: 10px;
-  width: 100%;
+  width: 85%;
   margin: 20px 0;
+}
+.calc-row {
+  display: flex;
+  width: 90%;
+  align-items: center;
+  justify-content: space-around;
+  padding: 1rem 0;
 }
 .result-box p {
   font-size: 30px;
@@ -358,7 +284,127 @@ input[type="radio"] {
   padding: 10px;
   margin: 20px 0;
 }
+.range-box,
+.invest-box {
+  width: 100%;
+}
 /* SIP/ Lumpsum */
+.sip,
+.mf {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 55%;
+}
+
+.chart-box {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.chart-def {
+  display: flex;
+  justify-content: space-evenly;
+  width: 85%;
+  padding: 1.5rem 0 0 0;
+}
+.chart-def span::before {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 20px;
+  border-radius: 2px;
+  margin: 0 10px;
+  background: currentColor;
+}
+.chart {
+  background: radial-gradient(
+    circle closest-side,
+    transparent 100%,
+    var(--primary-color) 0
+  );
+  min-width: 300px;
+  min-height: 300px;
+  max-width: 450px;
+  max-height: 450px;
+}
+.chart-sip {
+  background: radial-gradient(
+      circle closest-side,
+      transparent 100%,
+      var(--primary-color) 0
+    ),
+    conic-gradient(
+      from 0deg,
+      var(--color-chart-init) 0,
+      var(--color-chart-init) var(--data-init-sip),
+      var(--color-chart-ret) 0,
+      var(--color-chart-ret) var(--data-ret-sip)
+    );
+}
+.chart-mf {
+  background: radial-gradient(
+      circle closest-side,
+      transparent 100%,
+      var(--primary-color) 0
+    ),
+    conic-gradient(
+      from 0deg,
+      var(--color-chart-init) 0,
+      var(--color-chart-init) var(--data-init-mf),
+      var(--color-chart-ret) 0,
+      var(--color-chart-ret) var(--data-ret-mf)
+    );
+}
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 20px;
+  align-self: center;
+  border-radius: 20px;
+  outline: none;
+  background: #fff;
+  transition: all 0.5s ease;
+}
+#sip-intrest-slider {
+  background: linear-gradient(
+    90deg,
+    var(--btn-submit) var(--data-intrest-sip),
+    #fff var(--data-intrest-sip)
+  );
+}
+#sip-period-slider {
+  background: linear-gradient(
+    90deg,
+    var(--btn-submit) var(--data-period-sip),
+    #fff var(--data-period-sip)
+  );
+}
+#mf-intrest-slider {
+  background: linear-gradient(
+    90deg,
+    var(--btn-submit) var(--data-intrest-mf),
+    #fff var(--data-intrest-mf)
+  );
+}
+#mf-period-slider {
+  background: linear-gradient(
+    90deg,
+    var(--btn-submit) var(--data-period-mf),
+    #fff var(--data-period-mf)
+  );
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  background-color: #fff;
+  cursor: pointer;
+}
 .radio-box {
   width: 50%;
   align-items: center;
@@ -372,21 +418,10 @@ input[type="radio"] {
   padding: 10px 0;
   width: 100%;
 }
-.result-sip {
-  flex-direction: column;
-}
+
 #tag {
   font-size: 20px;
   color: rgba(0, 0, 0, 0.514);
-}
-.sip-row {
-  display: flex;
-  align-items: center;
-}
-.sip-row div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 /* Theme */
 .theme {
