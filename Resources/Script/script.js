@@ -45,7 +45,15 @@ const MFPeriodVal = document.querySelector(".mf-period-value");
 const MFResInit = document.querySelector(".mf-result-initial");
 const MFResRet = document.querySelector(".mf-result-return");
 const MFResTot = document.querySelector(".mf-result-total");
-
+// RD
+const RDInitial = document.getElementById("rd-initial");
+const RDIntrest = document.getElementById("rd-intrest-slider");
+const RDIntrestInput = document.getElementById("rd-intrest");
+const RDPeriod = document.getElementById("rd-period-slider");
+const RDPeriodVal = document.querySelector(".rd-period-value");
+const RDResInit = document.querySelector(".rd-result-initial");
+const RDResRet = document.querySelector(".rd-result-return");
+const RDResTot = document.querySelector(".rd-result-total");
 let SIPMode = 1;
 // Internationalization:
 const options = {
@@ -308,5 +316,41 @@ const renderMF = function (int) {
   root.style.setProperty("--data-period-mf", `${(period / 0.3).toFixed(2)}%`);
   renderMFResult(initial, intrest, period);
 };
+// RD
+const renderRDResult = function (init, int, per) {
+  let maturity;
+  maturity = (init * (1 + int / 100) ** per).toFixed(0);
+  RDResInit.innerHTML = `${new Intl.NumberFormat("en-IN", options).format(
+    init
+  )}`;
+  RDResRet.innerHTML = `${new Intl.NumberFormat("en-IN", options).format(
+    (maturity - init).toFixed(0)
+  )}`;
+  RDResTot.innerHTML = `${new Intl.NumberFormat("en-IN", options).format(
+    maturity
+  )}`;
+  root.style.setProperty("--data-init-rd", `${(init * 100) / maturity}%`);
+};
+const renderRD = function (int) {
+  RDIntrest.value = RDIntrestInput.value = int;
+  if (RDInitial.value > 5000000) RDInitial.value = 5000000;
+  if (RDInitial.value <= 0) RDInitial.value = 500;
+  if (RDIntrestInput.value <= 0) RDIntrest.value = RDIntrestInput.value = 1;
+  if (RDIntrestInput.value > 50) RDIntrest.value = RDIntrestInput.value = 50;
+  const initial = RDInitial.value;
+  const intrest = RDIntrest.value;
+  const period = RDPeriod.value;
+  // Constraints:
+
+  RDPeriodVal.innerHTML = `${period} ${+period === 1 ? "Year" : "Years"}`;
+  // Render Sliders:
+  root.style.setProperty(
+    "--data-intrest-rd",
+    `${(intrest / 0.12).toFixed(2)}%`
+  );
+  root.style.setProperty("--data-period-rd", `${(period / 0.1).toFixed(2)}%`);
+  renderRDResult(initial, intrest, period);
+};
 renderSIP(SIPIntrest.value);
 renderMF(MFIntrest.value);
+renderRD(RDIntrest.value);

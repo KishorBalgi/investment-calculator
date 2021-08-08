@@ -403,6 +403,103 @@
       </div>
     </section>
 
+    <section id="rd-calc">
+      <div class="calc-box">
+        <div class="rd">
+          <h2>Recurring Deposit Calculator</h2>
+          <form>
+            <div class="invest-box">
+              <label for="rd-initial">Total Investment:</label
+              ><span
+                >&#8377;<input
+                  type="number"
+                  id="rd-initial"
+                  value="10000"
+                  oninput="renderRD(document.getElementById(`rd-intrest`).value)"
+                  min="500"
+                  max="1000000"
+              /></span>
+            </div>
+
+            <div class="range-box">
+              <div>
+                <label for="rd-intrest">Expected Intrest:</label>
+                <span
+                  ><input
+                    type="number"
+                    min="1"
+                    max="12"
+                    step="0.1"
+                    value="5.5"
+                    oninput="renderRD(this.value)"
+                    id="rd-intrest"
+                  />%</span
+                >
+              </div>
+              <div>
+                <input
+                  class="slider"
+                  type="range"
+                  min="1"
+                  max="12"
+                  step="0.1"
+                  value="5.5"
+                  id="rd-intrest-slider"
+                  oninput="renderRD(this.value)"
+                />
+              </div>
+            </div>
+
+            <div class="range-box">
+              <div>
+                <label for="rd-period">Expected Intrest:</label>
+                <span class="rd-period-value">5 Years</span>
+              </div>
+              <div>
+                <input
+                  class="slider"
+                  type="range"
+                  min="1"
+                  max="10"
+                  step="1"
+                  value="2"
+                  id="rd-period-slider"
+                  oninput="renderRD(document.getElementById(`rd-intrest`).value)"
+                />
+              </div>
+            </div>
+          </form>
+          <div class="result-box result-sip">
+            <div class="calc-row">
+              <div>
+                <p id="tag">Total Investment</p>
+                <p class="rd-result-initial"></p>
+              </div>
+              <div>
+                <p id="tag">Est. Returns</p>
+                <p class="rd-result-return"></p>
+              </div>
+            </div>
+            <div>
+              <div>
+                <p id="tag">Total Amount</p>
+                <p class="rd-result-total"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="chart-box">
+          <div class="chart chart-rd"></div>
+          <div class="chart-def">
+            <p>
+              <span style="color: var(--color-chart-init)"></span>Investment
+            </p>
+            <p><span style="color: var(--color-chart-ret)"></span>Returns</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <div class="theme">
       <img class="mode" src="Vendors/Icons/013-mode-light.png" />
       <input type="checkbox" id="btn-theme" value="light" />

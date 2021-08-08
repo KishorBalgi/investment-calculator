@@ -11,10 +11,14 @@
   --data-period-sip: 3.33%;
   --data-intrest-mf: 24%;
   --data-period-mf: 16.66%;
+  --data-intrest-rd: 24%;
+  --data-period-rd: 16.66%;
   --data-init-sip: 93.6841%;
   --data-ret-sip: 6.3158%;
   --data-init-mf: 93.6841%;
   --data-ret-mf: 6.3158%;
+  --data-init-rd: 93.6841%;
+  --data-ret-rd: 6.3158%;
 }
 * {
   margin: 0;
@@ -73,6 +77,7 @@ h2 {
   place-items: center;
   color: #fff;
   font-size: 25px;
+  text-align: center;
   padding: 15px;
 }
 .calc-box {
@@ -162,7 +167,6 @@ form {
   flex-direction: column;
   width: 100%;
   align-items: center;
-  padding-bottom: 3rem;
 }
 form div {
   display: flex;
@@ -262,6 +266,7 @@ input[type="radio"] {
   border-radius: 10px;
   width: 85%;
   margin: 20px 0;
+  padding: 1rem;
 }
 .calc-row {
   display: flex;
@@ -290,7 +295,9 @@ input[type="radio"] {
 }
 /* SIP/ Lumpsum */
 .sip,
-.mf {
+.mf,
+.rd,
+.fd {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -358,6 +365,20 @@ input[type="radio"] {
       var(--color-chart-ret) var(--data-ret-mf)
     );
 }
+.chart-rd {
+  background: radial-gradient(
+      circle closest-side,
+      transparent 100%,
+      var(--primary-color) 0
+    ),
+    conic-gradient(
+      from 0deg,
+      var(--color-chart-init) 0,
+      var(--color-chart-init) var(--data-init-rd),
+      var(--color-chart-ret) 0,
+      var(--color-chart-ret) var(--data-ret-rd)
+    );
+}
 .slider {
   -webkit-appearance: none;
   width: 100%;
@@ -394,6 +415,20 @@ input[type="radio"] {
     90deg,
     var(--btn-submit) var(--data-period-mf),
     #fff var(--data-period-mf)
+  );
+}
+#rd-intrest-slider {
+  background: linear-gradient(
+    90deg,
+    var(--btn-submit) var(--data-intrest-rd),
+    #fff var(--data-intrest-rd)
+  );
+}
+#rd-period-slider {
+  background: linear-gradient(
+    90deg,
+    var(--btn-submit) var(--data-period-rd),
+    #fff var(--data-period-rd)
   );
 }
 .slider::-webkit-slider-thumb {
