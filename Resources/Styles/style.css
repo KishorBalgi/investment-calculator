@@ -7,18 +7,22 @@
   --theme: rgb(202, 200, 200);
   --color-chart-init: #7ab2ff;
   --color-chart-ret: #e1f1ff;
-  --data-intrest-sip: 40%;
-  --data-period-sip: 3.33%;
-  --data-intrest-mf: 24%;
-  --data-period-mf: 16.66%;
-  --data-intrest-rd: 24%;
-  --data-period-rd: 16.66%;
-  --data-init-sip: 93.6841%;
-  --data-ret-sip: 6.3158%;
-  --data-init-mf: 93.6841%;
-  --data-ret-mf: 6.3158%;
-  --data-init-rd: 93.6841%;
-  --data-ret-rd: 6.3158%;
+  --data-intrest-sip: 0%;
+  --data-period-sip: 0%;
+  --data-intrest-mf: 0%;
+  --data-period-mf: 0%;
+  --data-intrest-rd: 0%;
+  --data-period-rd: 0%;
+  --data-intrest-rd: 0%;
+  --data-period-rd: 0%;
+  --data-init-sip: 0%;
+  --data-ret-sip: 0%;
+  --data-init-mf: 0%;
+  --data-ret-mf: 0%;
+  --data-init-rd: 0%;
+  --data-ret-rd: 0%;
+  --data-init-fd: 0%;
+  --data-ret-fd: 0%;
 }
 * {
   margin: 0;
@@ -55,15 +59,17 @@ input {
   outline: none;
   margin: 0 7px;
 }
+input:disabled {
+  background: none;
+  color: #000;
+}
 label {
   font-weight: bold;
 }
 select {
-  width: 65%;
   border-radius: 5px;
   border: none;
   height: 30px;
-  padding-left: 5px;
   outline: none;
 }
 h1 {
@@ -105,6 +111,14 @@ h2 {
 }
 .btn-back:hover {
   background-color: rgba(240, 240, 240, 0.8);
+}
+.mode-select {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+.mode-select input {
+  width: 35px;
 }
 /* Navigation */
 header {
@@ -189,7 +203,7 @@ input[type="radio"] {
 }
 .invest-form::after {
   content: attr(data-afterInvest);
-  color: red;
+  color: #fff;
   padding: 10px 0;
 }
 
@@ -241,14 +255,12 @@ input[type="radio"] {
 }
 .return-form::after {
   content: attr(data-afterReturn);
-  color: red;
+  color: #fff;
   padding: 10px 0;
-  margin: 0 auto;
 }
 .return div {
   width: 80%;
 }
-
 .btn-submit {
   width: 70%;
   padding: 15px;
@@ -365,6 +377,20 @@ input[type="radio"] {
       var(--color-chart-ret) var(--data-ret-mf)
     );
 }
+.chart-fd {
+  background: radial-gradient(
+      circle closest-side,
+      transparent 100%,
+      var(--primary-color) 0
+    ),
+    conic-gradient(
+      from 0deg,
+      var(--color-chart-init) 0,
+      var(--color-chart-init) var(--data-init-fd),
+      var(--color-chart-ret) 0,
+      var(--color-chart-ret) var(--data-ret-fd)
+    );
+}
 .chart-rd {
   background: radial-gradient(
       circle closest-side,
@@ -422,6 +448,20 @@ input[type="radio"] {
     90deg,
     var(--btn-submit) var(--data-intrest-rd),
     #fff var(--data-intrest-rd)
+  );
+}
+#fd-period-slider {
+  background: linear-gradient(
+    90deg,
+    var(--btn-submit) var(--data-period-fd),
+    #fff var(--data-period-fd)
+  );
+}
+#fd-intrest-slider {
+  background: linear-gradient(
+    90deg,
+    var(--btn-submit) var(--data-intrest-fd),
+    #fff var(--data-intrest-fd)
   );
 }
 #rd-period-slider {

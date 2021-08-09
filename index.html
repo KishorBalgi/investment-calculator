@@ -258,7 +258,7 @@
 
             <div class="range-box">
               <div>
-                <label for="sip-period">Expected Intrest:</label>
+                <label for="sip-period">Time Period:</label>
                 <span class="sip-period-value">1 Year</span>
               </div>
               <div>
@@ -355,7 +355,7 @@
 
             <div class="range-box">
               <div>
-                <label for="mf-period">Expected Intrest:</label>
+                <label for="mf-period">Time Period:</label>
                 <span class="mf-period-value">5 Years</span>
               </div>
               <div>
@@ -409,7 +409,7 @@
           <h2>Recurring Deposit Calculator</h2>
           <form>
             <div class="invest-box">
-              <label for="rd-initial">Total Investment:</label
+              <label for="rd-initial">Monthly Investment:</label
               ><span
                 >&#8377;<input
                   type="number"
@@ -423,7 +423,7 @@
 
             <div class="range-box">
               <div>
-                <label for="rd-intrest">Expected Intrest:</label>
+                <label for="rd-intrest">Rate of Intrest(P.A):</label>
                 <span
                   ><input
                     type="number"
@@ -452,8 +452,19 @@
 
             <div class="range-box">
               <div>
-                <label for="rd-period">Expected Intrest:</label>
-                <span class="rd-period-value">5 Years</span>
+                <label for="rd-period">Time Period:</label>
+                <span class="mode-select">
+                  <input
+                    name="rd-period-value"
+                    id="rd-period-value"
+                    value="2"
+                    disabled
+                  />
+                  <select name="rd-mode" id="rd-mode">
+                    <option value="YY" selected>Year</option>
+                    <option value="MM">Month</option>
+                  </select>
+                </span>
               </div>
               <div>
                 <input
@@ -469,6 +480,7 @@
               </div>
             </div>
           </form>
+
           <div class="result-box result-sip">
             <div class="calc-row">
               <div>
@@ -490,6 +502,115 @@
         </div>
         <div class="chart-box">
           <div class="chart chart-rd"></div>
+          <div class="chart-def">
+            <p>
+              <span style="color: var(--color-chart-init)"></span>Investment
+            </p>
+            <p><span style="color: var(--color-chart-ret)"></span>Returns</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="fd-calc">
+      <div class="calc-box">
+        <div class="fd">
+          <h2>Recurring Deposit Calculator</h2>
+          <form>
+            <div class="invest-box">
+              <label for="fd-initial">Total Investment:</label
+              ><span
+                >&#8377;<input
+                  type="number"
+                  id="fd-initial"
+                  value="100000"
+                  oninput="renderFD(document.getElementById(`fd-intrest`).value)"
+                  min="1000"
+                  max="100000000"
+              /></span>
+            </div>
+
+            <div class="range-box">
+              <div>
+                <label for="fd-intrest">Expected Intrest:</label>
+                <span
+                  ><input
+                    type="number"
+                    min="1"
+                    max="15"
+                    step="0.5"
+                    value="6.5"
+                    oninput="renderFD(this.value)"
+                    id="fd-intrest"
+                  />%</span
+                >
+              </div>
+              <div>
+                <input
+                  class="slider"
+                  type="range"
+                  min="1"
+                  max="15"
+                  step="0.5"
+                  value="6.5"
+                  id="fd-intrest-slider"
+                  oninput="renderFD(this.value)"
+                />
+              </div>
+            </div>
+
+            <div class="range-box">
+              <div>
+                <label for="fd-period">Expected Intrest:</label>
+                <span class="mode-select">
+                  <input
+                    name="fd-period-value"
+                    id="fd-period-value"
+                    value="2"
+                    disabled
+                  />
+                  <select name="fd-mode" id="fd-mode">
+                    <option value="YY" selected>Year</option>
+                    <option value="MM">Month</option>
+                    <option value="DD">Day</option>
+                  </select>
+                </span>
+              </div>
+              <div>
+                <input
+                  class="slider"
+                  type="range"
+                  min="1"
+                  max="10"
+                  step="1"
+                  value="5"
+                  id="fd-period-slider"
+                  oninput="renderFD(document.getElementById(`fd-intrest`).value)"
+                />
+              </div>
+            </div>
+          </form>
+          <div class="result-box result-sip">
+            <div class="calc-row">
+              <div>
+                <p id="tag">Total Investment</p>
+                <p class="fd-result-initial"></p>
+              </div>
+              <div>
+                <p id="tag">Est. Returns</p>
+                <p class="fd-result-return"></p>
+              </div>
+            </div>
+            <div>
+              <div>
+                <p id="tag">Total Amount</p>
+                <p class="fd-result-total"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="chart-box">
+          <div class="chart chart-fd"></div>
           <div class="chart-def">
             <p>
               <span style="color: var(--color-chart-init)"></span>Investment

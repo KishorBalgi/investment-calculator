@@ -45,15 +45,26 @@ const MFPeriodVal = document.querySelector(".mf-period-value");
 const MFResInit = document.querySelector(".mf-result-initial");
 const MFResRet = document.querySelector(".mf-result-return");
 const MFResTot = document.querySelector(".mf-result-total");
+// FD
+const FDInitial = document.getElementById("fd-initial");
+const FDIntrest = document.getElementById("fd-intrest-slider");
+const FDIntrestInput = document.getElementById("fd-intrest");
+const FDPeriod = document.getElementById("fd-period-slider");
+const FDPeriodVal = document.getElementById("fd-period-value");
+const FDResInit = document.querySelector(".fd-result-initial");
+const FDResRet = document.querySelector(".fd-result-return");
+const FDResTot = document.querySelector(".fd-result-total");
+const FDMode = document.getElementById("fd-mode");
 // RD
 const RDInitial = document.getElementById("rd-initial");
 const RDIntrest = document.getElementById("rd-intrest-slider");
 const RDIntrestInput = document.getElementById("rd-intrest");
 const RDPeriod = document.getElementById("rd-period-slider");
-const RDPeriodVal = document.querySelector(".rd-period-value");
+const RDPeriodVal = document.getElementById("rd-period-value");
 const RDResInit = document.querySelector(".rd-result-initial");
 const RDResRet = document.querySelector(".rd-result-return");
 const RDResTot = document.querySelector(".rd-result-total");
+const RDMode = document.getElementById("rd-mode");
 let SIPMode = 1;
 // Internationalization:
 const options = {
@@ -317,40 +328,112 @@ const renderMF = function (int) {
   renderMFResult(initial, intrest, period);
 };
 // RD
+const SliderAttr = function (min, max, step, val, id) {
+  id.setAttribute("min", min);
+  id.setAttribute("max", max);
+  id.setAttribute("step", step);
+  id.setAttribute("value", val);
+};
+RDMode.oninput = function () {
+  if (RDMode.value === "YY") SliderAttr(1, 10, 1, 2, RDPeriod);
+  else SliderAttr(3, 9, 3, 6, RDPeriod);
+  renderRD(RDIntrest.value);
+};
 const renderRDResult = function (init, int, per) {
-  let maturity;
-  maturity = (init * (1 + int / 100) ** per).toFixed(0);
+  let maturity = 0;
+  let t = RDMode.value === "YY" ? per * 12 : per;
+  const N = (RDMode.value === "YY" ? per * 12 : per) / 3;
+  const tot = init * (RDMode.value === "YY" ? per * 12 : per);
+  while (t !== 0) {
+    maturity = maturity + init * (1 + int / (100 * N)) ** ((N * t) / 12);
+    t--;
+  }
   RDResInit.innerHTML = `${new Intl.NumberFormat("en-IN", options).format(
-    init
+    tot
   )}`;
   RDResRet.innerHTML = `${new Intl.NumberFormat("en-IN", options).format(
-    (maturity - init).toFixed(0)
+    (maturity - tot).toFixed(0)
   )}`;
   RDResTot.innerHTML = `${new Intl.NumberFormat("en-IN", options).format(
     maturity
   )}`;
-  root.style.setProperty("--data-init-rd", `${(init * 100) / maturity}%`);
+  root.style.setProperty("--data-init-rd", `${(tot * 100) / maturity}%`);
 };
 const renderRD = function (int) {
   RDIntrest.value = RDIntrestInput.value = int;
-  if (RDInitial.value > 5000000) RDInitial.value = 5000000;
+  if (RDInitial.value > 1000000) RDInitial.value = 1000000;
   if (RDInitial.value <= 0) RDInitial.value = 500;
   if (RDIntrestInput.value <= 0) RDIntrest.value = RDIntrestInput.value = 1;
-  if (RDIntrestInput.value > 50) RDIntrest.value = RDIntrestInput.value = 50;
+  if (RDIntrestInput.value > 12) RDIntrest.value = RDIntrestInput.value = 12;
   const initial = RDInitial.value;
   const intrest = RDIntrest.value;
   const period = RDPeriod.value;
   // Constraints:
 
-  RDPeriodVal.innerHTML = `${period} ${+period === 1 ? "Year" : "Years"}`;
+  RDPeriodVal.value = period;
   // Render Sliders:
   root.style.setProperty(
     "--data-intrest-rd",
     `${(intrest / 0.12).toFixed(2)}%`
   );
-  root.style.setProperty("--data-period-rd", `${(period / 0.1).toFixed(2)}%`);
+  root.style.setProperty(
+    "--data-period-rd",
+    `${(RDMode.value === "YY" ? period / 0.1 : (period - 3) / 3 / 0.02).toFixed(
+      2
+    )}%`
+  );
   renderRDResult(initial, intrest, period);
+};
+// FD
+FDMode.oninput = function () {
+  if (FDMode.value === "YY") SliderAttr(1, 10, 1, 2, FDPeriod);
+  else if (FDMode.value === "MM") SliderAttr(1, 11, 1, 3, FDPeriod);
+  else SliderAttr(1, 31, 1, 7, FDPeriod);
+  renderFD(FDIntrest.value);
+};
+const renderFDResult = function (init, int, per) {
+  let maturity;
+  maturity = (init * (1 + int / 100) ** per).toFixed(0);
+  FDResInit.innerHTML = `${new Intl.NumberFormat("en-IN", options).format(
+    init
+  )}`;
+  FDResRet.innerHTML = `${new Intl.NumberFormat("en-IN", options).format(
+    (maturity - init).toFixed(0)
+  )}`;
+  FDResTot.innerHTML = `${new Intl.NumberFormat("en-IN", options).format(
+    maturity
+  )}`;
+  root.style.setProperty("--data-init-fd", `${(init * 100) / maturity}%`);
+};
+const renderFD = function (int) {
+  FDIntrest.value = FDIntrestInput.value = int;
+  if (FDInitial.value > 100000000) FDInitial.value = 100000000;
+  if (FDInitial.value <= 0) FDInitial.value = 500;
+  if (FDIntrestInput.value <= 0) FDIntrest.value = FDIntrestInput.value = 1;
+  if (FDIntrestInput.value > 15) FDIntrest.value = FDIntrestInput.value = 15;
+  const initial = FDInitial.value;
+  const intrest = FDIntrest.value;
+  const period = FDPeriod.value;
+  // Constraints:
+
+  FDPeriodVal.value = period;
+  // Render Sliders:
+  root.style.setProperty(
+    "--data-intrest-fd",
+    `${(intrest / 0.15).toFixed(2)}%`
+  );
+  root.style.setProperty(
+    "--data-period-fd",
+    `${(FDMode.value === "YY"
+      ? period / 0.1
+      : FDMode.value === "MM"
+      ? period / 0.11
+      : period / 0.31
+    ).toFixed(2)}%`
+  );
+  renderFDResult(initial, intrest, period);
 };
 renderSIP(SIPIntrest.value);
 renderMF(MFIntrest.value);
 renderRD(RDIntrest.value);
+renderFD(FDIntrest.value);
