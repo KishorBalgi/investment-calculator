@@ -42,10 +42,27 @@
   .asset {
     width: 90%;
   }
+  .it-form-asstage {
+    flex-direction: column;
+    align-items: center;
+  }
+  .it-form-asstage-div {
+    width: 90%;
+    padding: 20px 0;
+  }
+  .it-form-asstage-div select {
+    width: 100%;
+  }
+  .it-calculator {
+    border-radius: 10px;
+  }
 }
 @media only screen and (max-width: 850px) {
   .result-box {
     width: 105%;
+  }
+  .it-forms-box {
+    grid-template-columns: 1fr;
   }
 }
 @media only screen and (max-width: 760px) {

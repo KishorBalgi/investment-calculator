@@ -1,5 +1,7 @@
 "use strict";
 const root = document.documentElement;
+const sections = document.querySelectorAll("section");
+const navlinks = document.querySelectorAll(".nav-link");
 const selectType = document.querySelector(".select-type");
 const investForm = document.querySelector(".invest-form");
 const investStudent = document.querySelector(".invest-student");
@@ -66,6 +68,36 @@ const RDResRet = document.querySelector(".rd-result-return");
 const RDResTot = document.querySelector(".rd-result-total");
 const RDMode = document.getElementById("rd-mode");
 let SIPMode = 1;
+// Income Tax:
+const AgeGroup = document.getElementById("age-group");
+const InSalary = document.getElementById("it-income-salary");
+const InSA = document.getElementById("it-income-sa");
+const InLTA = document.getElementById("it-income-lta");
+const InDA = document.getElementById("it-income-da");
+const InHRA = document.getElementById("it-income-hra");
+const InRent = document.getElementById("it-income-rent");
+const InOth = document.getElementById("it-income-other");
+const InInt = document.getElementById("it-income-intrest");
+const InIntHL = document.getElementById("it-income-intresthome");
+const InMetro = document.getElementById("it-metro");
+const DeELSS = document.getElementById("it-ded-elss");
+const DePPF = document.getElementById("it-ded-ppf");
+const DeSSY = document.getElementById("it-ded-ssy");
+const DeFD = document.getElementById("it-ded-fd");
+const DeEPF = document.getElementById("it-ded-epf");
+const DeNSC = document.getElementById("it-ded-nsc");
+const DeTution = document.getElementById("it-ded-tution");
+const DeLoanPrinc = document.getElementById("it-ded-loanprinciple");
+const DeOth = document.getElementById("it-ded-other");
+const DeMedS = document.getElementById("it-ded-meds");
+const DeMedP = document.getElementById("it-ded-medp");
+const DeSenior = document.getElementById("it-ded-senior");
+const DeIntSav = document.getElementById("it-ded-intsav");
+const DeIntEdu = document.getElementById("it-ded-eduloan");
+const DeLTA = document.getElementById("it-ded-lta");
+const ITCalculate = document.querySelector(".it-calculate");
+const ITResultBox = document.querySelector(".it-result-box");
+const ITResult = document.querySelector(".it-result-total");
 // Internationalization:
 const options = {
   style: "currency",
@@ -132,7 +164,6 @@ const submitInvestWorking = function (e) {
     setErrorInvest("*All fields are required.");
     return;
   }
-  const currencyVal = "&#8377;";
   const salaryVal = salary.value;
   const ageVal = age.value;
   const spendingVal = spending.value;
@@ -393,7 +424,7 @@ FDMode.oninput = function () {
 };
 const renderFDResult = function (init, int, per) {
   let maturity;
-  maturity = (init * (1 + int / 100) ** per).toFixed(0);
+  maturity = init * (1 + int / 100) ** per;
   FDResInit.innerHTML = `${new Intl.NumberFormat("en-IN", options).format(
     init
   )}`;
@@ -437,3 +468,154 @@ renderSIP(SIPIntrest.value);
 renderMF(MFIntrest.value);
 renderRD(RDIntrest.value);
 renderFD(FDIntrest.value);
+// Income Tax:
+// HRA Exemption:
+const calcHRA = function () {
+  if (InHRA.value === "") return 0;
+  const BDA = +InSalary.value + +InDA.value;
+  const A = +InHRA.value;
+  const B = InMetro.value === "y" ? BDA * 0.5 : BDA * 0.4;
+  const C = +InRent.value - BDA * 0.1;
+  if (A < B && A < C) return A;
+  else if (B < A && B < C) return B;
+  else return C;
+};
+// Regime 1:
+const regime1 = function (Taxable) {
+  let Tax = 0;
+  if (AgeGroup.value === "59") {
+    if (Taxable < 500000) return Tax;
+    // 0 to 2.5L:
+    if (Taxable > 250000) Tax += 0;
+    else return Tax;
+    // 2.5L to 5L:
+    if (Taxable > 500000) Tax += 12500;
+    else return (Tax += (Taxable - 250000) * 0.05);
+    // 5L to 7.5L:
+    if (Taxable > 750000) Tax += 50000;
+    else return (Tax += (Taxable - 500000) * 0.2);
+    // 7.5L to 10L:
+    if (Taxable > 1000000) Tax += 50000;
+    else return (Tax += (Taxable - 750000) * 0.2);
+    // 10L to 12.5L:
+    if (Taxable > 1250000) Tax += 75000;
+    else return (Tax += (Taxable - 1000000) * 0.3);
+    // 12.5L to 15L:
+    if (Taxable > 1500000) Tax += 75000;
+    else return (Tax += (Taxable - 1250000) * 0.3);
+    // 15L and above:
+    if (Taxable > 1500000) return (Tax += (Taxable - 1500000) * 0.3);
+  } else if (AgeGroup.value === "60") {
+    if (Taxable < 500000) return Tax;
+    // 0 to 3L:
+    if (Taxable > 300000) Tax += 0;
+    else return Tax;
+    // 3L to 5L:
+    if (Taxable > 500000) Tax += 10000;
+    else return (Tax += (Taxable - 300000) * 0.05);
+    // 5L to 10L:
+    if (Taxable > 1000000) Tax += 100000;
+    else return (Tax += (Taxable - 500000) * 0.2);
+    // 10L and above:
+    if (Taxable > 1000000) return (Tax += (Taxable - 1000000) * 0.3);
+  } else {
+    if (Taxable < 500000) return Tax;
+    // 0 to 5L:
+    if (Taxable > 500000) Tax += 0;
+    else return Tax;
+    // 5L to 10L:
+    if (Taxable > 1000000) Tax += 100000;
+    else return (Tax += (Taxable - 500000) * 0.2);
+    // 10L and above:
+    if (Taxable > 1000000) return (Tax += (Taxable - 1000000) * 0.3);
+  }
+};
+// Regime 2:
+const regime2 = function (Taxable) {
+  let Tax = 0;
+  if (Taxable < 500000) return Tax;
+  // 0 to 2.5L:
+  if (Taxable > 250000) Tax += 0;
+  else return Tax;
+  // 2.5L to 5L:
+  if (Taxable > 500000) Tax += 12500;
+  else return (Tax += (Taxable - 250000) * 0.05);
+  // 5L to 7.5L:
+  if (Taxable > 750000) Tax += 25000;
+  else return (Tax += (Taxable - 500000) * 0.1);
+  // 7.5L to 10L:
+  if (Taxable > 1000000) Tax += 37500;
+  else return (Tax += (Taxable - 750000) * 0.15);
+  // 10L to 12.5L:
+  if (Taxable > 1250000) Tax += 50000;
+  else return (Tax += (Taxable - 1000000) * 0.2);
+  // 10L to 12.5L:
+  if (Taxable > 1500000) Tax += 62500;
+  else return (Tax += (Taxable - 1250000) * 0.25);
+  // 10L to 12.5L:
+  if (Taxable > 1500000) return (Tax += (Taxable - 1500000) * 0.3);
+};
+// Main Func:
+const calcIT = function () {
+  const GrossSalary =
+    +InSalary.value + +InSA.value + +InLTA.value + +InDA.value + +InHRA.value;
+  const HRAexe = calcHRA();
+  const LTAexe = DeLTA === "" ? 0 : +DeLTA.value;
+  const IncOther = +InOth.value + +InInt.value;
+  const GrossTotIncome1 = GrossSalary + IncOther - HRAexe - LTAexe - 50000;
+  const GrossTotIncome2 = GrossSalary + IncOther;
+  const Ded80C =
+    +DeELSS.value +
+    +DeEPF.value +
+    +DeFD.value +
+    +DeSSY.value +
+    +DePPF.value +
+    +DeNSC.value +
+    +DeTution.value +
+    +DeLoanPrinc.value +
+    +DeOth.value;
+  const S80Cexe = Ded80C < 150000 ? Ded80C : 150000;
+  const MedS = DeMedS.value < 25000 ? +DeMedS.value : 25000;
+  const MedP =
+    DeSenior.value === "n"
+      ? DeMedP.value < 25000
+        ? +DeMedP.value
+        : 25000
+      : DeMedP.value < 50000
+      ? +DeMedP.value
+      : 50000;
+  const S80Dexe = MedS + MedP;
+  const IntSav = DeIntSav.value < 10000 ? +DeIntSav.value : 10000;
+  const S80TTAexe = IntSav + +DeIntEdu.value;
+  const TaxableInc1 = GrossTotIncome1 - S80Cexe - S80Dexe - S80TTAexe;
+  const Tax1 = regime1(TaxableInc1);
+  const Tax2 = regime2(GrossTotIncome2);
+  const TotTax1 = Tax1 + 0.04 * Tax1;
+  const TotTax2 = Tax2 + 0.04 * Tax2;
+  ITResult.innerHTML = `Old Regime:${new Intl.NumberFormat(
+    "en-IN",
+    options
+  ).format(TotTax1)}<br><br>New Regime:${new Intl.NumberFormat(
+    "en-IN",
+    options
+  ).format(TotTax2)}`;
+  ITResultBox.classList.remove("hidden");
+};
+ITCalculate.addEventListener("click", calcIT);
+// Section reveal:
+sections.forEach((s) => {
+  s.classList.add("hidden");
+});
+sections[0].classList.remove("hidden");
+navlinks.forEach((link) =>
+  link.addEventListener("click", function (e) {
+    const id = e.target.getAttribute("href");
+    console.log(id);
+    const sec = document.querySelector(id);
+    sections.forEach((s) => {
+      if (!s.classList.contains("hidden")) s.classList.add("hidden");
+    });
+    sec.classList.remove("hidden");
+  })
+);
+//

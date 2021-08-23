@@ -11,19 +11,17 @@
     <title>Investment Calculator</title>
   </head>
   <body>
-    <header>
-      <nav class="main-nav">
-        <ul class="nav-links">
-          <li class="nav-link"><a href="#invest">Invest</a></li>
-          <li class="nav-link"><a href="#ar-cagr">AR & CAGR</a></li>
-          <li class="nav-link"><a href="#sip-calc">SIP/Lumpsum</a></li>
-          <li class="nav-link"><a href="#"> </a></li>
-          <li class="nav-link"><a href="#"> </a></li>
-          <li class="nav-link"><a href="#"> </a></li>
-        </ul>
-      </nav>
-    </header>
-
+    <nav class="main-nav">
+      <ul class="nav-links">
+        <li class="nav-link"><a href="#invest">Invest</a></li>
+        <li class="nav-link"><a href="#ar-cagr">AR & CAGR</a></li>
+        <li class="nav-link"><a href="#sip-calc">SIP/Lumpsum</a></li>
+        <li class="nav-link"><a href="#mf-calc">Mutual Funds</a></li>
+        <li class="nav-link"><a href="#rd-calc">Reccuring Deposite</a></li>
+        <li class="nav-link"><a href="#fd-calc">Fixed deposit</a></li>
+        <li class="nav-link"><a href="#it-calc">Income Tax</a></li>
+      </ul>
+    </nav>
     <section id="invest">
       <div class="calculator">
         <div class="select-type hiidden">
@@ -33,7 +31,7 @@
           <button class="btn-type btn-student">Under 18</button>
         </div>
 
-        <form class="invest-form hiidden">
+        <form class="invest-form">
           <!-- <div>
             <label for="currency">Currency:</label>
             <select name="currency" id="currency"></select>
@@ -515,7 +513,7 @@
     <section id="fd-calc">
       <div class="calc-box">
         <div class="fd">
-          <h2>Recurring Deposit Calculator</h2>
+          <h2>Fixed Deposit Calculator</h2>
           <form>
             <div class="invest-box">
               <label for="fd-initial">Total Investment:</label
@@ -621,6 +619,225 @@
       </div>
     </section>
 
+    <section id="it-calc">
+      <div class="it-calculator">
+        <h2>Income Tax Calculator</h2>
+        <form class="it-form-asstage">
+          <div class="it-form-asstage-div">
+            <label for="asst-year">Assement Year:</label
+            ><select name="asst-year" id="asst-year">
+              <option value="2021-2022">2021-2022</option>
+              <option value="2020-2021" selected>2020-2021</option>
+              <option value="2019-2020">2019-2020</option>
+            </select>
+          </div>
+          <div class="it-form-asstage-div">
+            <label for="age-group">Age Group:</label
+            ><select name="age-group" id="age-group">
+              <option value="59" selected>Below 60</option>
+              <option value="60">60 or above 60</option>
+              <option value="80">80 or above 80</option>
+            </select>
+          </div>
+        </form>
+
+        <div class="it-forms-box">
+          <div class="it-form-column">
+            <p>Income</p>
+            <form class="it-form">
+              <div>
+                <label for="it-income-salary">Basic Salary:</label>
+                <input
+                  name="it-income-salary"
+                  id="it-income-salary"
+                  placeholder="0"
+                />
+              </div>
+              <div>
+                <label for="it-income-sa">Special Allowance:</label>
+                <input name="it-income-sa" id="it-income-sa" placeholder="0" />
+              </div>
+              <div>
+                <label for="it-income-lta">LTA:</label>
+                <input
+                  name="it-income-lta"
+                  id="it-income-lta"
+                  placeholder="0"
+                />
+              </div>
+              <div>
+                <label for="it-income-da">Dearness allowance(DA):</label>
+                <input name="it-income-da" id="it-income-da" placeholder="0" />
+              </div>
+              <div>
+                <label for="it-income-hra">HRA received per annum:</label>
+                <input
+                  name="it-income-hra"
+                  id="it-income-hra"
+                  placeholder="0"
+                />
+              </div>
+              <div>
+                <label for="it-income-rent">Total rent paid per annum:</label>
+                <input
+                  name="it-income-rent"
+                  id="it-income-rent"
+                  placeholder="0"
+                />
+              </div>
+
+              <div>
+                <label for="it-income-other"
+                  >Annual Income from other sources:</label
+                >
+                <input
+                  name="it-income-other"
+                  id="it-income-other"
+                  placeholder="0"
+                />
+              </div>
+              <div>
+                <label for="it-income-intrest"
+                  >Annual Income from interest:</label
+                >
+                <input
+                  name="it-income-intrest"
+                  id="it-income-intrest"
+                  placeholder="0"
+                />
+              </div>
+              <div>
+                <label for="it-income-intresthome"
+                  >Annual interest paid on home loan:</label
+                >
+                <input
+                  name="it-income-intresthome"
+                  id="it-income-intresthome"
+                  placeholder="0"
+                />
+              </div>
+              <div>
+                <label for="">Do you live in a metro city?</label>
+                <select name="it-metro" id="it-metro">
+                  <option value="y" selected>Yes</option>
+                  <option value="n">No</option>
+                </select>
+              </div>
+            </form>
+          </div>
+
+          <div class="it-form-column">
+            <p>Deduction Section 80C</p>
+            <form class="it-form">
+              <div>
+                <label for="it-ded-elss">ELSS investment:</label>
+                <input name="it-ded-elss" id="it-ded-elss" placeholder="0" />
+              </div>
+              <div>
+                <label for="it-ded-ppf">PPF investment:</label>
+                <input name="it-ded-ppf" id="it-ded-ppf" placeholder="0" />
+              </div>
+              <div>
+                <label for="it-ded-ssy">Sukanya Samriddhi Yojana:</label>
+                <input name="it-ded-ssy" id="it-ded-ssy" placeholder="0" />
+              </div>
+              <div>
+                <label for="it-ded-fd">FD (5 years lock-in):</label>
+                <input name="it-ded-fd" id="it-ded-fd" placeholder="0" />
+              </div>
+              <div>
+                <label for="it-ded-epf">EPF Investment:</label>
+                <input name="it-ded-epf" id="it-ded-epf" placeholder="0" />
+              </div>
+              <div>
+                <label for="it-ded-nsc">NSC Investment:</label>
+                <input name="it-ded-nsc" id="it-ded-nsc" placeholder="0" />
+              </div>
+              <div>
+                <label for="it-ded-tution">Tution Fee of 2 Children:</label>
+                <input
+                  name="it-ded-tution"
+                  id="it-ded-tution"
+                  placeholder="0"
+                />
+              </div>
+              <div>
+                <label for="it-ded-loanprinciple"
+                  >Housing Loan repayment (Principle amount):</label
+                >
+                <input
+                  name="it-ded-loanprinciple"
+                  id="it-ded-loanprinciple"
+                  placeholder="0"
+                />
+              </div>
+              <div>
+                <label for="it-ded-other"
+                  >Other Investments under Section 80C:</label
+                >
+                <input name="it-ded-other" id="it-ded-other" placeholder="0" />
+              </div>
+            </form>
+          </div>
+
+          <div class="it-form-column">
+            <p>Other Deductions</p>
+            <form class="it-form">
+              <div>
+                <label for="it-ded-meds"
+                  >Medical Insurance Premium(for self):</label
+                >
+                <input name="it-ded-meds" id="it-ded-meds" placeholder="0" />
+              </div>
+              <div>
+                <label for="it-ded-medp"
+                  >Medical Insurance Premium(for parents):</label
+                >
+                <input name="it-ded-medp" id="it-ded-medp" placeholder="0" />
+              </div>
+              <div>
+                <label for="it-ded-senior"
+                  >Are your parents senior citizens?</label
+                >
+                <select name="it-senior-citizen" id="it-ded-senior">
+                  <option value="y">Yes</option>
+                  <option value="n" selected>No</option>
+                </select>
+              </div>
+              <div>
+                <label for="it-ded-intsav">Intrest on Savings Account:</label>
+                <input
+                  name="it-ded-intsav"
+                  id="it-ded-intsav"
+                  placeholder="0"
+                />
+              </div>
+              <div>
+                <label for="it-ded-eduloan">Intrest on Education Loan:</label>
+                <input
+                  name="it-ded-eduloan"
+                  id="it-ded-eduloan"
+                  placeholder="0"
+                />
+              </div>
+              <div>
+                <label for="it-ded-lta">LTA claimed:</label>
+                <input name="it-ded-lta" id="it-ded-lta" placeholder="0" />
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="it-calculate-div">
+          <button class="it-calculate">Calculate</button>
+        </div>
+
+        <div class="it-result-box hidden">
+          <p id="tag">Tax Amount :</p>
+          <p class="it-result-total">8263483</p>
+        </div>
+      </div>
+    </section>
     <div class="theme">
       <img class="mode" src="Vendors/Icons/013-mode-light.png" />
       <input type="checkbox" id="btn-theme" value="light" />
