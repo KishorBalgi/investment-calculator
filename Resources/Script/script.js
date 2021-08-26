@@ -2,6 +2,8 @@
 const root = document.documentElement;
 const sections = document.querySelectorAll("section");
 const navlinks = document.querySelectorAll(".nav-link");
+const btnMobNav = document.querySelector(".btn-mob-nav");
+const mobNav = document.querySelector(".nav-links");
 const selectType = document.querySelector(".select-type");
 const investForm = document.querySelector(".invest-form");
 const investStudent = document.querySelector(".invest-student");
@@ -127,6 +129,15 @@ const date = new Date();
 //     currency.insertAdjacentHTML("beforeend", html);
 //   });
 // };
+// Mob Nav:
+btnMobNav.addEventListener("click", () => {
+  mobNav.classList.remove("active");
+  navlinks.forEach((l) =>
+    l.addEventListener("click", () => {
+      mobNav.classList.add("active");
+    })
+  );
+});
 // Submt Invest Working:
 const clearFieldInvest = function () {
   salary.value = age.value = spending.value = saving.value = "";
